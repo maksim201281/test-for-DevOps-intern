@@ -15,6 +15,6 @@ for arg in "$@"; do
     fi
 done
 echo "Names: ${names[@]}"
-python3 test_task_DevOPS.py "$names" #Executing a python script that generates an HTML page and passing to it the value containing the names for the greeting
+python test_task_DevOPS.py "${names[@]}" #Executing a python script that generates an HTML page and passing to it the value containing the names for the greeting
 docker build -t test_task_docker_image . #building an image from the dockerfile 
 docker run -it --rm -p "$port":80 test_task_docker_image # Start the container in interactive mode and open the page on the specified port
