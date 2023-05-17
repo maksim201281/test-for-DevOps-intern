@@ -1,13 +1,20 @@
-port=$1 #the variable gets the first passed value 
-#Checking the first value transmitted for the port number
-if [[ ! $port =~ ^[1-9][0-9]{0,4}$ || $port -gt 65536 ]]; then
-    echo "The port must be a number from 1 to 65536"
-    port=8080 # default port value
+# Fetching the first value passed
+port=$1
+# Checking the first value for a number and range
+if [[ $port =~ ^[0-9]+$ && $port -le 65536 ]]; then
+    echo "Port: $port"
+else
+    echo "Invalid port number or no port number provided. Using default port: 8080"
+    port=8080
 fi
-echo "Port: $port"
-shift #shift to the right if the first value transmitted is the port number
-names=$@  #contains all the command line arguments passed to the script except for the port number
-echo "Names: $names"
-python test_task_DevOPS.py "$names" #Executing a python script that generates an HTML page and passing to it the value containing the names for the greeting
+# Creating array of names without numbers
+names=()
+for arg in "$@"; do
+    if ! [[ $arg =~ ^[0-9]+$ ]]; then
+        names+=("$arg")
+    fi
+done
+echo "Names: ${names[@]}"
+python3 test_task_DevOPS.py "$names" #Executing a python script that generates an HTML page and passing to it the value containing the names for the greeting
 docker build -t test_task_docker_image . #building an image from the dockerfile 
 docker run -it --rm -p "$port":80 test_task_docker_image # Start the container in interactive mode and open the page on the specified port
