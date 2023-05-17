@@ -6,7 +6,7 @@ with open("index.html", "w") as file: #  Creating a file for recording
     file.write("<html>\n")
     file.write("<h2> Hello, Greetings: : </h2>\n")
     #split the string of passed argument
-    for name in sys.argv[1].split(' '):
+    for name in sys.argv[1:]:
         file.write(f'<h2>{name}</h2>')
     file.write('<img src="Cat_mem.jpg">\n')
      # Close tags and file
