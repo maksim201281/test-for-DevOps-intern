@@ -7,5 +7,5 @@
 
 Порядок запуска:
 загрузить все фыйлы из репозитория в отдельный каталог
-запустить скрипт test_task_DevOPS.sh 
+запустить скрипт test_task_DevOPS.sh с параметрами для приветствия. Например: chmod +x test_task_DevOPS.sh && ./test_task_DevOPS.sh 2323233 Victorya Maksim Sergey 54545
 версия python 3.10.6 
